@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#box{width:100px;height:100px;background: yellow}
+	</style>
+</head>
+<body>
+	<div id="box">12345</div>
+	<script>
+		/*
+			bind的使用讲解
+				使用：fn.bind(obj,参数列表);//ie9+
+				返回一个新的函数
+
+			与call的区别：
+				1.bind的返回值是函数
+				2.后面的参数使用也是有区别的
+		*/
+		// function fn(name,id){
+		// 	console.log(name+"=="+id+"==="+this);
+		// }
+		//fn("梨落",1);
+
+		// var obj = {a:123};
+		// fn.bind(obj,"kery",2)();
+
+
+		/*function BoxEvent(){
+			this.id = "object";
+			this.dom = document.getElementById("box");
+		};
+		BoxEvent.prototype.init = function(){
+			this.dom.onmouseover = function(){
+				console.log("over===="+this.id);
+			};
+			this.dom.onmouseout = function(){
+				console.log("out===="+this.id);
+			}.bind(this);
+		};
+		new BoxEvent().init();*/
+
+
+
+		//与call的区别（参数的使用不同）
+		// function args(c){a,b,
+		// 	console.log(a+"==="+b+"==="+c);
+		// }
+		// var newArgs = args.bind(null,3,10,17);
+		// newArgs(5,6);
+
+		//兼容我们的bind方法
+		/*if(!Function.prototype.bind){
+			Function.prototype.bind = function(obj){
+				var $this = this,args = arguments;
+				return function(){
+					 $this.apply(obj,Array.prototype.slice.apply(args,[1]));
+				}
+			};
+		}
+
+		function fn(name,id){
+			console.log(name+"=="+id+"==="+this);
+		}
+		fn.bind(null,"kery",111)();*/
+
+
+
+		//console.log([3,4,5,7,8].slice(1));
+		// Array.prototype.slice = function(){
+		// 	var arr = [];
+		// 	for(var i=0;i<this.length;i++){
+		// 		arr.push(this[i]);
+		// 	}
+		// 	return arr;
+		// };
+	</script>
+</body>
+</html>

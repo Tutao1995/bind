@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*
+			对象的克隆
+		*/
+
+		var json = {
+			name:"Kery",
+			x:{
+				y:10
+			}
+		};
+		/*
+		var a = {};
+		a["name"] = json["name"];
+		console.log(JSON.stringify(a));*/
+
+
+		/*function Clone(obj){
+			var newObj = {};
+			for(var key in obj){
+				newObj[key] = obj[key];
+			}
+			return newObj;
+		}*/
+		// var aa = Clone(json);
+		// aa.x.z = 100;
+		// console.log(JSON.stringify(aa));
+		// console.log(JSON.stringify(json));
+
+
+		/*function Clone(obj){
+			var newObj = {};
+			for(var key in obj){
+				if(typeof obj[key] != "object"){
+					newObj[key] = obj[key];
+				}else{//是对象
+					newObj[key] = Clone(obj[key]);
+				}
+			}
+			return newObj;
+		}*/
+
+
+		//对象的克隆
+		function Clone(obj){
+			for(var key in obj){
+				this[key] = (typeof obj[key] != "object")?obj[key]:new Clone(obj[key]);
+			}
+		}
+	</script>
+</body>
+</html>

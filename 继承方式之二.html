@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*
+			继承：
+				孩子可以在父亲基础上，新增属性与方法(父亲不能改变)，并且孩子可以拥有父亲的属性与方法。
+
+			组合继承（构造函数继承+类式继承）
+			组合寄生式继承（构造函数继承+寄生继承）
+		*/
+		function Person(name,age){
+			this.name = name;
+			this.age = age;
+		}
+		Person.prototype.showName = function(){
+			console.log(this.name);
+		}
+
+
+		//实现继承（构造函数式继承）
+		function Pchild(name,age,address){
+			Person.call(this,name,age);//精华体现
+			this.address = address;
+		}
+		//Pchild.prototype = Person.prototype;
+		// Pchild.prototype.constructor = Pchild;//改变原型的构造器指向
+		//Pchild.prototype = new Person();//类式继承
+
+
+		function Fn(){};
+		Fn.prototype = Person.prototype;
+		Pchild.prototype = new Fn();
+		Pchild.prototype.constructor = Pchild;
+
+		Pchild.prototype.showAddress = function(){
+			console.log(this.address);
+		};
+
+		var p = new Person("parent",30);
+		var c = new Pchild("child",1,"长沙");
+		//p.showName();
+		//p.showAddress();
+		//console.log(Pchild.prototype.constructor);
+
+
+		//目的---->孩子可以获取父亲的东西，孩子增加的东西不能影响父亲。
+
+		/*function Fn(){};
+		Fn.prototype.x = 10;
+
+		var f = new Fn();
+		f.name = "张三";*/
+	</script>
+</body>
+</html>
